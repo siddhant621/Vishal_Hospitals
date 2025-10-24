@@ -40,7 +40,8 @@ urlpatterns = [
 
 
     path('afterlogin', views.afterlogin_view,name='afterlogin'),
-    path('logout', LogoutView.as_view(template_name='hospital/index.html'),name='logout'),
+    path('logout', views.logout_view, name='logout'),
+
 
 
     path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
@@ -108,6 +109,7 @@ urlpatterns +=[
     path('patient-discharge', views.patient_discharge_view,name='patient-discharge'),
 
 ]
+
 
 #Developed By : sumit kumar
 #facebook : fb.com/sumit.luv

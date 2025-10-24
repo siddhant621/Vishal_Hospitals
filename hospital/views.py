@@ -842,6 +842,14 @@ def contactus_view(request):
 #---------------------------------------------------------------------------------
 
 
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    """Logs out user and redirects to home."""
+    logout(request)
+    return redirect('/')
+
 
 #Developed By : sumit kumar
 #facebook : fb.com/sumit.luv
