@@ -1,199 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-
 <head>
   <meta charset="utf-8">
-  <style>
-    @page {
-      size: A4;
-      margin: 1cm;
-
-      @frame footer {
-        -pdf-frame-content: footerContent;
-        bottom: 0cm;
-        margin-left: 9cm;
-        margin-right: 9cm;
-        height: 1cm;
-      }
-    }
-
-    .invoice-box {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-      font-size: 16px;
-      line-height: 24px;
-      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-      color: #555;
-    }
-
-    .invoice-box table {
-      width: 100%;
-      line-height: inherit;
-      text-align: left;
-    }
-
-    .invoice-box table td {
-      padding: 5px;
-      vertical-align: top;
-    }
-
-    .invoice-box table tr td:nth-child(2) {
-      text-align: right;
-    }
-
-    .invoice-box table tr.top table td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.top table td.title {
-      font-size: 45px;
-      line-height: 45px;
-      color: #333;
-    }
-
-    .invoice-box table tr.information table td {
-      padding-bottom: 40px;
-    }
-
-    .invoice-box table tr.heading td {
-      background: #eee;
-      border-bottom: 1px solid #ddd;
-      font-weight: bold;
-    }
-
-    .invoice-box table tr.details td {
-      padding-bottom: 20px;
-    }
-
-    .invoice-box table tr.item td {
-      border-bottom: 1px solid #eee;
-    }
-
-    .invoice-box table tr.item.last td {
-      border-bottom: none;
-    }
-
-    .invoice-box table tr.total td:nth-child(2) {
-      border-top: 2px solid #eee;
-      font-weight: bold;
-    }
-
-    @media only screen and (max-width: 600px) {
-      .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-
-      .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-    }
-
-    /** RTL **/
-    .rtl {
-      direction: rtl;
-      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    }
-
-    .rtl table {
-      text-align: right;
-    }
-
-    .rtl table tr td:nth-child(2) {
-      text-align: left;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hospital Invoice</title>
 </head>
 
-<body>
+<body class="bg-gray-100 font-sans text-gray-700">
+  <div class="max-w-3xl mx-auto bg-white shadow-lg border border-gray-200 rounded-lg mt-10 p-8">
+    
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row justify-between border-b pb-4 mb-6">
+      <div>
+        <h2 class="text-2xl font-semibold text-gray-800">Vishal Multispeciality Hospital</h2>
+      </div>
+      <div class="text-sm text-gray-600 mt-4 md:mt-0">
+        <p>Admit Date: {{admitDate}}</p>
+        <p>Release Date: {{releaseDate}}</p>
+        <p>Days Spent: {{daySpent}}</p>
+      </div>
+    </div>
 
-  <br><br><br>
-  <div class="invoice-box">
-    <table cellpadding="0" cellspacing="0">
-      <tr class="top">
-        <td colspan="2">
-          <table>
-            <tr>
-              <td class="title">
-                <h5>Vishal Multispeciality Hospital</h5>
-              </td>
+    <!-- Patient Info -->
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <p><span class="font-semibold">Patient Name:</span> {{patientName}}</p>
+        <p><span class="font-semibold">Patient Mobile:</span> {{mobile}}</p>
+        <p><span class="font-semibold">Patient Address:</span> {{address}}</p>
+      </div>
+      <div>
+        <p><span class="font-semibold">Doctor Name:</span></p>
+        <p>{{assignedDoctorName}}</p>
+      </div>
+    </div>
 
-              <td>
+    <!-- Symptoms -->
+    <div class="mb-6">
+      <h3 class="font-semibold text-gray-800 mb-2">Disease and Symptoms:</h3>
+      <p class="pl-4">{{symptoms}}</p>
+    </div>
 
-                Admit Date: {{admitDate}}<br>
-                Release Date: {{releaseDate}}<br>
-                Days Spent: {{daySpent}}
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <tr class="information">
-        <td colspan="2">
-          <table>
-            <tr>
-              <td>
-                Patient Name : {{patientName}}<br>
-                Patient Mobile : {{mobile}}<br>
-                Patient Addres : {{address}}<br>
-              </td>
-
-              <td>
-                Doctor Name :<br>
-                {{assignedDoctorName}}<br>
-
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-
-      <tr class="information">
-        <td colspan="2">
-          <table>
-            <tr>
-              <td>
-                Disease and Symptoms :<br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp {{symptoms}}
-              </td>
-
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-
-
-      <tr class="information">
-        <td colspan="2">
-          <table>
-            <tr>
-              <td>
-                Charges :<br><br>
-                Room Charge of {{daySpent}} Days : {{roomCharge}}<br>
-                Doctor Fee : {{doctorFee}}<br>
-                Medicine Cost : {{medicineCost}}<br>
-                Other Charge : {{OtherCharge}} <br><br>
-                &nbsp &nbsp &nbsp &nbsp &nbsp Total Rupees : {{total}}
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-
-    </table>
+    <!-- Charges -->
+    <div class="bg-gray-50 p-4 rounded-lg">
+      <h3 class="font-semibold text-gray-800 mb-3">Charges:</h3>
+      <ul class="space-y-1">
+        <li>Room Charge of {{daySpent}} Days: <span class="float-right">{{roomCharge}}</span></li>
+        <li>Doctor Fee: <span class="float-right">{{doctorFee}}</span></li>
+        <li>Medicine Cost: <span class="float-right">{{medicineCost}}</span></li>
+        <li>Other Charge: <span class="float-right">{{OtherCharge}}</span></li>
+      </ul>
+      <hr class="my-3 border-gray-300">
+      <p class="font-bold text-lg text-gray-900 text-right">Total Rupees: {{total}}</p>
+    </div>
   </div>
 </body>
- 
 
 </html>

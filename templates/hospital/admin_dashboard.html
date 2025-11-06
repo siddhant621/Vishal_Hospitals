@@ -1,74 +1,95 @@
 {% extends 'hospital/admin_base.html' %}
 {% load static %}
 {% block content %}
-{%include 'hospital/admin_dashboard_cards.html'%}
+
+{% include 'hospital/admin_dashboard_cards.html' %}
+
 <br><br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary col-md-5" style="margin-left:2%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Doctors</h6>
+
+<div class="max-w-7xl mx-auto px-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+    <!-- Recent Doctors -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+      <div class="bg-blue-600 text-white py-3 text-center">
+        <h6 class="text-lg font-semibold">Recent Doctors</h6>
       </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Mobile</th>
-            <th>Status</th>
-
-          </tr>
-        </thead>
-        {% for d in doctors %}
-        <tr>
-          <td> {{d.get_name}}</td>
-          <td>{{d.department}}</td>
-          <td>{{d.mobile}}</td>
-          {%if d.status%}
-          <td> <span class="label label-primary">Permanent</span></td>
-          {% else %}
-          <td> <span class="label label-success">On Hold</span></td>
-          {% endif %}
-
-        </tr>
-        {% endfor %}
-      </table>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm text-left text-gray-700">
+          <thead class="bg-gray-100 uppercase text-gray-600">
+            <tr>
+              <th class="px-6 py-3">Name</th>
+              <th class="px-6 py-3">Department</th>
+              <th class="px-6 py-3">Mobile</th>
+              <th class="px-6 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for d in doctors %}
+            <tr class="border-b hover:bg-gray-50 transition">
+              <td class="px-6 py-3">{{ d.get_name }}</td>
+              <td class="px-6 py-3">{{ d.department }}</td>
+              <td class="px-6 py-3">{{ d.mobile }}</td>
+              <td class="px-6 py-3">
+                {% if d.status %}
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    Permanent
+                  </span>
+                {% else %}
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                    On Hold
+                  </span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="panel panel-primary col-md-5" style="margin-left:5%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Patient</h6>
+    <!-- Recent Patients -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+      <div class="bg-green-600 text-white py-3 text-center">
+        <h6 class="text-lg font-semibold">Recent Patients</h6>
       </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Symptoms</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Status</th>
-
-          </tr>
-        </thead>
-        {% for p in patients %}
-        <tr>
-          <td> {{p.get_name}}</td>
-          <td>{{p.symptoms}}</td>
-          <td>{{p.mobile}}</td>
-          <td>{{p.address}}</td>
-          {%if p.status%}
-          <td> <span class="label label-primary">Admitted</span></td>
-          {% else %}
-          <td> <span class="label label-success">On Hold</span></td>
-          {% endif %}
-
-        </tr>
-        {% endfor %}
-      </table>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm text-left text-gray-700">
+          <thead class="bg-gray-100 uppercase text-gray-600">
+            <tr>
+              <th class="px-6 py-3">Name</th>
+              <th class="px-6 py-3">Symptoms</th>
+              <th class="px-6 py-3">Mobile</th>
+              <th class="px-6 py-3">Address</th>
+              <th class="px-6 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in patients %}
+            <tr class="border-b hover:bg-gray-50 transition">
+              <td class="px-6 py-3">{{ p.get_name }}</td>
+              <td class="px-6 py-3">{{ p.symptoms }}</td>
+              <td class="px-6 py-3">{{ p.mobile }}</td>
+              <td class="px-6 py-3">{{ p.address }}</td>
+              <td class="px-6 py-3">
+                {% if p.status %}
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    Admitted
+                  </span>
+                {% else %}
+                  <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                    On Hold
+                  </span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
 </div>
-
- 
 
 {% endblock content %}

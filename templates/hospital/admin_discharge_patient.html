@@ -1,52 +1,50 @@
 {% extends 'hospital/admin_base.html' %}
 {% block content %}
+{% load static %}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
- 
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Discharge Patient</h6>
+<div class="max-w-5xl mx-auto px-6 py-10">
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-blue-600 text-white py-3 text-center">
+      <h6 class="text-lg font-semibold tracking-wide">Discharge Patients</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Symptoms</th>
-          <th>Mobile</th>
-          <th>Discharge</th>
-        </tr>
-      </thead>
-      {% for p in patients %}
-      <tr>
-        <td> {{p.get_name}}</td>
-        <td>{{p.symptoms}}</td>
-        <td>{{p.mobile}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'discharge-patient' p.id  %}"><span class="glyphicon glyphicon-log-out"></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm text-left text-gray-700">
+        <thead class="bg-gray-100 uppercase text-gray-600">
+          <tr>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Symptoms</th>
+            <th class="px-6 py-3">Mobile</th>
+            <th class="px-6 py-3">Discharge</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in patients %}
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="px-6 py-3 font-medium">{{ p.get_name }}</td>
+            <td class="px-6 py-3">{{ p.symptoms }}</td>
+            <td class="px-6 py-3">{{ p.mobile }}</td>
+            <td class="px-6 py-3">
+              <a href="{% url 'discharge-patient' p.id %}"
+                 class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-9A2.25 2.25 0 002.25 5.25v13.5A2.25 2.25 0 004.5 21h9a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                </svg>
+                Discharge
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
   </div>
-
-
 </div>
- 
 
 {% endblock content %}

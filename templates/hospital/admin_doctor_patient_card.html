@@ -1,89 +1,54 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
+<html lang="en">
 
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    .card {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      max-width: 300px;
-      margin: auto;
-      text-align: center;
-      font-family: arial;
-    }
-
-    .title {
-      color: grey;
-      font-size: 18px;
-    }
-
-    button {
-      border: none;
-      outline: 0;
-      display: inline-block;
-      padding: 8px;
-      color: white;
-      background-color: #000;
-      text-align: center;
-      cursor: pointer;
-      width: 100%;
-      font-size: 18px;
-    }
-
-    button:hover,
-    a:hover {
-      opacity: 0.7;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: auto auto auto;
-      padding: 10px;
-    }
-
-    a:link {
-      text-decoration: none;
-    }
-
-    a {
-      color: white;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Role Selection</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
 
-
-
-  <div class="grid-container">
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/admin.png" %}" alt="John" style="width:100%">
-        <p class="title">ADMIN</p>
-        <p><button><a href="/adminclick">View</a></button></p>
-      </div>
-
-    </div>
-
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/doctor.png" %}" alt="John" style="width:100%">
-        <p class="title">DOCTOR</p>
-        <p><button><a href="/doctorclick">View</a></button></p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-6 max-w-6xl mx-auto">
+    
+    <!-- ADMIN Card -->
+    <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="{% static 'images/admin.png' %}" alt="Admin" class="w-full h-60 object-cover">
+      <div class="p-6 text-center">
+        <p class="text-gray-500 text-lg font-semibold mb-4">ADMIN</p>
+        <a href="/adminclick"
+           class="inline-block w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition">
+          View
+        </a>
       </div>
     </div>
 
-    <div class="grid-item">
-      <div class="card">
-        <img src="{% static "images/patient.jpg" %}" alt="John" style="width:100%">
-        <p class="title">PATIENT</p>
-        <p><button><a href="/patientclick">View</a></button></p>
+    <!-- DOCTOR Card -->
+    <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="{% static 'images/doctor.png' %}" alt="Doctor" class="w-full h-60 object-cover">
+      <div class="p-6 text-center">
+        <p class="text-gray-500 text-lg font-semibold mb-4">DOCTOR</p>
+        <a href="/doctorclick"
+           class="inline-block w-full bg-green-600 text-white font-medium py-2 rounded-lg hover:bg-green-700 transition">
+          View
+        </a>
+      </div>
+    </div>
+
+    <!-- PATIENT Card -->
+    <div class="bg-white shadow-lg rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300">
+      <img src="{% static 'images/patient.jpg' %}" alt="Patient" class="w-full h-60 object-cover">
+      <div class="p-6 text-center">
+        <p class="text-gray-500 text-lg font-semibold mb-4">PATIENT</p>
+        <a href="/patientclick"
+           class="inline-block w-full bg-purple-600 text-white font-medium py-2 rounded-lg hover:bg-purple-700 transition">
+          View
+        </a>
       </div>
     </div>
 
   </div>
- 
 
 </body>
 

@@ -1,120 +1,54 @@
-<!DOCTYPE html>
-
+{% extends 'hospital/homebase.html' %}
 {% load widget_tweaks %}
-<html lang="en" dir="ltr">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>LazyCoder || sumit</title>
-  <style type="text/css">
-    body {
-      color: #aa082e;
-      background-color: #b6bde7;
-      font-family: 'Roboto', sans-serif;
-    }
+{% block content %}
 
-    a:link {
-      text-decoration: none;
-    }
-
-    .note {
-      text-align: center;
-      height: 80px;
-      background: -webkit-linear-gradient(left, #0072ff, #8811c5);
-      color: #fff;
-      font-weight: bold;
-      line-height: 80px;
-    }
-
-    .form-content {
-      padding: 5%;
-      border: 1px solid #ced4da;
-      margin-bottom: 2%;
-    }
-
-    .form-control {
-      border-radius: 1.5rem;
-    }
-
-    .btnSubmit {
-      border: none;
-      border-radius: 1.5rem;
-      padding: 1%;
-      width: 20%;
-      cursor: pointer;
-      background: #0062cc;
-      color: #fff;
-    }
-  </style>
-
-</head>
-
-
-<body>
-  {% include "hospital/navbar.html" %}
-  <br>
-  <br>
-  <br>
-  <br>
-
-
-
-
-  <!--- signup page for patient by admin(sumit)  ---------->
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="container register-form">
-      <div class="form">
-        <div class="note">
-          <p>Register to Hospital</p>
-        </div>
-
-        <div class="form-content">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
-              </div>
-              <div class="form-group">
-                {% render_field userForm.username class="form-control" placeholder="Username" %}
-              </div>
-              <div class="form-group">
-                {% render_field patientForm.address class="form-control" placeholder="Address" %}
-              </div>
-              <div class="form-group">
-                {% render_field patientForm.symptoms class="form-control" placeholder="Symptoms" %}
-              </div>
-              <div class="form-group">
-                {% render_field patientForm.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
-              </div>
-              <div class="form-group">
-                {% render_field userForm.password class="form-control" placeholder="Password" %}
-              </div>
-              <div class="form-group">
-                {% render_field patientForm.mobile class="form-control" pattern="[6789][0-9]{9}" placeholder="Mobile Number" %}
-              </div>
-              <div class="form-group">
-                {% render_field patientForm.assignedDoctorId class="form-control" placeholder="Doctor" %}
-              </div>
-
-            </div>
-          </div>
-          <button type="submit" class="btnSubmit">Register</button>
-          <div class="text-center">Already have an account? <a href="patientlogin">Login here</a></div>
-        </div>
-      </div>
+<div class="min-h-screen bg-gradient-to-r from-blue-400 to-purple-600 flex items-center justify-center py-12 px-4">
+  <div class="bg-white shadow-lg rounded-xl w-full max-w-4xl p-8">
+    
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-white bg-gradient-to-r from-blue-500 to-purple-700 py-3 rounded-md inline-block px-6">Register to Hospital</h2>
     </div>
 
-  </form>
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
 
-  {% include "hospital/footer.html" %}
-</body>
- 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-</html>
+        <!-- Left Column -->
+        <div class="space-y-4">
+          {% render_field userForm.first_name class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="First Name" %}
+          {% render_field userForm.username class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Username" %}
+          {% render_field patientForm.address class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Address" %}
+          {% render_field patientForm.symptoms class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Symptoms" %}
+          {% render_field patientForm.profile_pic required="required" class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Profile Picture" %}
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-4">
+          {% render_field userForm.last_name class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Last Name" %}
+          {% render_field userForm.password class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Password" %}
+          {% render_field patientForm.mobile class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" pattern="[6789][0-9]{9}" placeholder="Mobile Number" %}
+          {% render_field patientForm.assignedDoctorId class="w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Doctor" %}
+        </div>
+
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-10 py-3 rounded-xl transition">Register</button>
+      </div>
+
+      <!-- Login Link -->
+      <p class="text-center text-gray-600">
+        Already have an account? 
+        <a href="/patientlogin" class="text-blue-600 hover:underline">Login here</a>
+      </p>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

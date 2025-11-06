@@ -1,39 +1,46 @@
 {% extends 'hospital/doctor_base.html' %}
 {% load static %}
 {% block content %}
-{%include 'hospital/doctor_dashboard_cards.html'%}
-<br><br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="panel panel-primary" style="margin-left:15%;">
-      <div class="panel-heading" style="text-align:center;">
-        <h6 class="panel-title">Recent Appointments For You</h6>
-      </div>
-      <table class="table table-hover" id="dev-table">
-        <thead>
+
+{% include 'hospital/doctor_dashboard_cards.html' %}
+<br><br><br>
+
+<div class="max-w-6xl mx-auto px-4">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
+    <div class="bg-blue-600 text-white text-center py-3">
+      <h6 class="text-lg font-semibold tracking-wide">Recent Appointments For You</h6>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100">
           <tr>
-            <th>Patient Name</th>
-            <th>Picture</th>
-            <th>Description</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Date</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Patient Name</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Picture</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Description</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Mobile</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Address</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Date</th>
           </tr>
         </thead>
-        {% for a,p in appointments %}
-        <tr>
-          <td>{{a.patientName}}</td>
-          <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-          <td>{{a.description}}</td>
-          <td>{{p.mobile}}</td>
-          <td>{{p.address}}</td>
-          <td>{{a.appointmentDate}}</td>
-        </tr>
-        {% endfor %}
+
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for a,p in appointments %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="px-6 py-4 text-gray-800 font-medium">{{ a.patientName }}</td>
+            <td class="px-6 py-4">
+              <img src="{% static p.profile_pic.url %}" alt="Profile Pic" class="h-10 w-10 rounded-full object-cover border border-gray-300">
+            </td>
+            <td class="px-6 py-4 text-gray-700">{{ a.description }}</td>
+            <td class="px-6 py-4 text-gray-700">{{ p.mobile }}</td>
+            <td class="px-6 py-4 text-gray-700">{{ p.address }}</td>
+            <td class="px-6 py-4 text-gray-700">{{ a.appointmentDate }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
   </div>
 </div>
- 
 
 {% endblock content %}

@@ -1,52 +1,44 @@
 {% extends 'hospital/doctor_base.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
- 
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Delete Your Appointments</h6>
+<div class="max-w-5xl mx-auto mt-20 px-4">
+  <div class="bg-white shadow-lg rounded-lg border border-gray-200">
+    <div class="bg-red-600 text-white text-center py-3 rounded-t-lg">
+      <h6 class="text-lg font-semibold tracking-wide">Delete Your Appointments</h6>
     </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
-          <th>Patient Name</th>
-          <th>Picture</th>
-          <th>Description</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      {% for a,p in appointments %}
-      <tr>
-        <td>{{a.patientName}}</td>
-        <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{a.description}}</td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-appointment' a.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Patient Name</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Picture</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase">Description</th>
+            <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700 uppercase">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for a,p in appointments %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="px-6 py-4 text-gray-800 font-medium">{{ a.patientName }}</td>
+            <td class="px-6 py-4">
+              <img src="{% static p.profile_pic.url %}" alt="Profile Pic" class="h-10 w-10 rounded-full object-cover border border-gray-300">
+            </td>
+            <td class="px-6 py-4 text-gray-700">{{ a.description }}</td>
+            <td class="px-6 py-4 text-center">
+              <a href="{% url 'delete-appointment' a.id %}"
+                 class="bg-red-500 hover:bg-red-600 text-white font-semibold px-3 py-2 rounded transition">
+                 Delete
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
- 
 
 {% endblock content %}

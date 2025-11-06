@@ -1,58 +1,39 @@
 {% extends 'hospital/doctor_base.html' %}
+{% load static %}
 {% block content %}
-{%load static%}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="max-w-6xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-xl">
+  <h2 class="text-2xl font-semibold text-center text-blue-600 mb-6">
+    Your Discharged Patient List
+  </h2>
 
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
- 
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Your Discharged Patient List</h6>
-    </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-200 rounded-lg">
+      <thead class="bg-blue-600 text-white">
         <tr>
-          <th>Name</th>
-
-          <th>Admit Date</th>
-          <th>Release Date</th>
-          <th>Symptoms</th>
-          <th>Mobile</th>
-          <th>Address</th>
-
+          <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Admit Date</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Release Date</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Symptoms</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Mobile</th>
+          <th class="px-4 py-3 text-left text-sm font-semibold">Address</th>
         </tr>
       </thead>
-      {% for p in dischargedpatients %}
-      <tr>
-        <td> {{p.patientName}}</td>
-        <td>{{p.admitDate}}</td>
-        <td>{{p.releaseDate}}</td>
-        <td>{{p.symptoms}}</td>
-        <td>{{p.mobile}}</td>
-        <td>{{p.address}}</td>
-      </tr>
-      {% endfor %}
+
+      <tbody class="divide-y divide-gray-200">
+        {% for p in dischargedpatients %}
+        <tr class="hover:bg-blue-50 transition">
+          <td class="px-4 py-3 text-gray-700 font-medium">{{ p.patientName }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ p.admitDate }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ p.releaseDate }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ p.symptoms }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ p.mobile }}</td>
+          <td class="px-4 py-3 text-gray-600">{{ p.address }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </div>
 </div>
- 
 
 {% endblock content %}

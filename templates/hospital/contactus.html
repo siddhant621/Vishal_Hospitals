@@ -3,35 +3,34 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Vishal || Jayant</title>
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback | Vishal Hospital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 min-h-screen flex flex-col">
 
   {% include "hospital/navbar.html" %}
-  <br><br>
 
-  <center>
-    <h3 class='alert alert-success'>Send Us Your Valuable Feedback !</h3>
+  <div class="flex-grow flex flex-col justify-center items-center px-4 py-10">
+    <div class="bg-white shadow-xl rounded-2xl w-full max-w-xl p-8 text-center">
+      <h2 class="text-2xl font-semibold text-green-600 mb-6">Send Us Your Valuable Feedback</h2>
 
-    <form method="POST">
-      <!-- Very Important csrf Token -->
-      {% csrf_token %}
-      <div class="form-group">
-        <p>
-        <h3>{{ form.as_p }}</h3>
-        </p>
-        <br>
-        <input type="submit" value="Send Message" class='btn btn-primary btn-lg'>
-      </div>
-    </form>
-  </center>
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        <div class="text-left text-gray-700 space-y-4">
+          {{ form.as_p }}
+        </div>
+
+        <button type="submit"
+          class="bg-blue-600 text-white px-8 py-2 rounded-full font-medium hover:bg-blue-700 transition duration-200 shadow-md">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
   {% include "hospital/footer.html" %}
-</body>
- 
 
+</body>
 </html>

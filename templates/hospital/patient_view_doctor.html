@@ -1,73 +1,53 @@
 {% extends 'hospital/patient_base.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="max-w-6xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
 
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
- 
-
-
-<div class="container">
-
-    <form  action="/searchdoctor" method="get" style="margin-left:70%;" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="query" id="query" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
- 
+  <!-- Search Form -->
+  <form action="/searchdoctor" method="get" class="flex justify-end gap-3 mb-6">
+    <input type="text" name="query" id="query" placeholder="Search Doctor"
+           class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    <button type="submit"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">Search</button>
+  </form>
 
   {% if doctors %}
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title"> Total Doctor List</h6>
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="bg-blue-600 px-6 py-3">
+      <h2 class="text-white text-center font-semibold text-lg">Total Doctor List</h2>
     </div>
-    <table class="table table-hover" id="dev-table">
-        <thead>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-100">
           <tr>
-  
-            <th>Name</th>
-            <th>Profile Picture</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Department</th>
-           
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profile Picture</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Department</th>
           </tr>
         </thead>
-        {% for d in doctors %}
-        <tr>
-  
-          <td> {{d.get_name}}</td>
-          <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-          <td>{{d.mobile}}</td>
-          <td>{{d.address}}</td>
-          <td>{{d.department}}</td>
-        </tr>
-        {% endfor %}
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for d in doctors %}
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ d.get_name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <img src="{{ d.profile_pic.url }}" alt="Profile Pic" class="h-10 w-10 rounded-full object-cover">
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ d.mobile }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ d.address }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ d.department }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
+    </div>
   </div>
-  {%else%}
-  <br><br><br>
-  <h4 style="text-align: center;color: red;">No Doctor Found !!!</h4>
+  {% else %}
+  <h4 class="text-center text-red-600 mt-12 text-lg">No Doctor Found !!!</h4>
   {% endif %}
 
-
 </div>
- 
 
 {% endblock content %}

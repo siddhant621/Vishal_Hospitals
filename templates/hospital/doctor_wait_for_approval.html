@@ -1,48 +1,41 @@
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vishal || Jayant</title>
-
-
-  <style media="screen">
-    .jumbotron {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    .jumbotron h1 {
-      text-align: center;
-    }
-
-    .alert {
-      margin: 0px;
-    }
-  </style>
-
 </head>
 
-<body>
+<body class="bg-gray-50 min-h-screen flex flex-col">
   {% include "hospital/navbar.html" %}
-  <br>
-  <br>
 
-  <div class="jumbotron" style="margin-top: 0px;
-    margin-bottom: 0px;">
-    <h1 class="display-4">Hello {{request.user.first_name}}</h1>
-    <p class="lead">Your Account is not approved till now <br><br>Our Team is checking your profile <br><br> Soon your Account will be confirmed !!!</p>
-    <hr class="my-4">
-    <p>Check Later</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout For Now</a>
-    </p>
-  </div>
+  <main class="flex-grow flex items-center justify-center mt-8">
+    <div class="bg-white shadow-lg rounded-xl p-10 max-w-2xl text-center">
+      <h1 class="text-3xl font-bold text-gray-800 mb-4">
+        Hello {{ request.user.first_name }}
+      </h1>
+
+      <p class="text-gray-600 leading-relaxed mb-6">
+        Your account has not been approved yet.<br><br>
+        Our team is reviewing your profile.<br><br>
+        Soon your account will be confirmed.
+      </p>
+
+      <hr class="border-gray-200 mb-6">
+
+      <p class="text-gray-500 mb-4">Please check back later.</p>
+
+      <a 
+        href="/logout"
+        class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-blue-700 transition"
+      >
+        Logout For Now
+      </a>
+    </div>
+  </main>
 
   {% include "hospital/footer.html" %}
 </body>
- 
 
 </html>

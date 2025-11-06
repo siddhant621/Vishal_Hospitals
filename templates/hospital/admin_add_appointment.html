@@ -2,77 +2,41 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<head>
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    .note {
-      text-align: center;
-      height: 80px;
-      background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      color: #fff;
-      font-weight: bold;
-      line-height: 80px;
-    }
-
-    .form-content {
-      padding: 5%;
-      border: 1px solid #ced4da;
-      margin-bottom: 2%;
-    }
-
-    .form-control {
-      border-radius: 1.5rem;
-    }
-
-    .btnSubmit {
-      border: none;
-      border-radius: 1.5rem;
-      padding: 1%;
-      width: 20%;
-      cursor: pointer;
-      background: #FAF9F6;
-      color: #fff;
-    }
-
-    .menu {
-      top: 50px;
-    }
-  </style>
-
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<br><br>
-<!------ add appointment page by admin(Vishal)  ---------->
-<form method="post">
+<form method="post" class="min-h-screen bg-gray-50 py-12">
   {% csrf_token %}
-  <div class="container register-form">
-    <div class="form">
-      <div class="note">
-        <p>Book Appointment Details</p>
-      </div>
-      <div class="form-content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              {% render_field appointmentForm.description class="form-control" placeholder="Description" %}
-            </div>
-            <div class="form-group">
-              {% render_field appointmentForm.doctorId class="form-control" placeholder="doctor" %}
-            </div>
-            <div class="form-group">
-              {% render_field appointmentForm.patientId class="form-control" placeholder="patient" %}
-            </div>
+  <div class="max-w-3xl mx-auto bg-white shadow-md rounded-2xl p-8">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-blue-600">Book Appointment</h2>
+      <p class="text-gray-600 mt-2">Fill in the details below to schedule an appointment</p>
+    </div>
 
-          </div>
-
-        </div>
-        <button type="submit" class="btnSubmit">Book</button>
+    <!-- Form Fields -->
+    <div class="space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+        {% render_field appointmentForm.description class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm p-3" placeholder="Description" %}
       </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Doctor</label>
+        {% render_field appointmentForm.doctorId class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm p-3" placeholder="Doctor" %}
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Patient</label>
+        {% render_field appointmentForm.patientId class="w-full rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm p-3" placeholder="Patient" %}
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center mt-10">
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors shadow-md"
+      >
+        Book Appointment
+      </button>
     </div>
   </div>
 </form>

@@ -3,96 +3,71 @@
 {% block content %}
 
 <head>
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    .note {
-      text-align: center;
-      height: 80px;
-      background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      color: #fff;
-      font-weight: bold;
-      line-height: 80px;
-    }
-
-    .form-content {
-      padding: 5%;
-      border: 1px solid #ced4da;
-      margin-bottom: 2%;
-    }
-
-    .form-control {
-      border-radius: 1.5rem;
-    }
-
-    .btnSubmit {
-      border: none;
-      border-radius: 1.5rem;
-      padding: 1%;
-      width: 20%;
-      cursor: pointer;
-      background: #FAF9F6;
-      color: #fff;
-    }
-
-    .menu {
-      top: 50px;
-    }
-  </style>
-
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+  <!-- Tailwind CDN (only needed if not globally loaded in base.html) -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <br><br><br>
-<!------ signup page for doctor by admin(vishal)  ---------->
+
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <div class="container register-form">
-    <div class="form">
-      <div class="note">
-        <p>Add New Doctor To Hospital</p>
-      </div>
-      <div class="form-content">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              {% render_field userForm.first_name class="form-control" placeholder="First Name" %}
-            </div>
-            <div class="form-group">
-              {% render_field userForm.username class="form-control" placeholder="Username" %}
-            </div>
-            <div class="form-group">
-              {% render_field doctorForm.department class="form-control" placeholder="Department" %}
-            </div>
-            <div class="form-group">
-              {% render_field doctorForm.address class="form-control" placeholder="Address" %}
-            </div>
 
+  <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-500 to-sky-500 py-6 text-center text-white text-2xl font-bold">
+      Add New Doctor to Hospital
+    </div>
+
+    <!-- Form Section -->
+    <div class="p-8 space-y-6">
+
+      <!-- Grid for form fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Left Column -->
+        <div class="space-y-4">
+          <div>
+            {% render_field userForm.first_name class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="First Name" %}
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              {% render_field userForm.last_name class="form-control" placeholder="Last Name" %}
-            </div>
-            <div class="form-group">
-              {% render_field userForm.password class="form-control" placeholder="Password" %}
-            </div>
-            <div class="form-group">
-              {% render_field doctorForm.mobile class="form-control"  placeholder="Mobile" %}
-            </div>
-            <div class="form-group">
-              {% render_field doctorForm.profile_pic required="required" class="form-control" placeholder="Profile Picture" %}
-            </div>
+          <div>
+            {% render_field userForm.username class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Username" %}
+          </div>
+          <div>
+            {% render_field doctorForm.department class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Department" %}
+          </div>
+          <div>
+            {% render_field doctorForm.address class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Address" %}
           </div>
         </div>
-        <button type="submit" class="btnSubmit">Register</button>
+
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <div>
+            {% render_field userForm.last_name class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Last Name" %}
+          </div>
+          <div>
+            {% render_field userForm.password type="password" class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Password" %}
+          </div>
+          <div>
+            {% render_field doctorForm.mobile class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" placeholder="Mobile" %}
+          </div>
+          <div>
+            {% render_field doctorForm.profile_pic required="required" class="w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-indigo-400 p-3" %}
+          </div>
+        </div>
       </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center pt-4">
+        <button type="submit" 
+          class="bg-indigo-600 hover:bg-indigo-700 transition text-white font-semibold py-3 px-8 rounded-xl shadow-md">
+          Register
+        </button>
+      </div>
+
     </div>
   </div>
-
 </form>
- 
+
 {% endblock content %}

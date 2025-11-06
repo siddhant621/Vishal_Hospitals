@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vishal || Jayant</title>
-
+  {% load static %}
+  <!-- You can include global CSS or JS files here -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="bg-light text-dark">
+
+  <!-- Navbar -->
   {% include "hospital/navbar.html" %}
-  {%block content%}
 
-  {%endblock content%}
+  <!-- Page Content -->
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+
+  <!-- Footer -->
   {% include "hospital/footer.html" %}
-</body>
- 
 
+</body>
 </html>

@@ -1,64 +1,64 @@
 {% extends 'hospital/admin_base.html' %}
+{% load static %}
 {% block content %}
-{%load static%}
 
-<head>
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-  <style media="screen">
-    a:link {
-      text-decoration: none;
-    }
-
-    h6 {
-      text-align: center;
-    }
-
-    .row {
-      margin: 100px;
-    }
-  </style>
-</head>
- 
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h6 class="panel-title">Doctors</h6>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center py-10 px-4">
+  <div class="w-full max-w-6xl bg-white shadow-lg rounded-2xl p-6">
+    
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-semibold text-gray-700">Doctors</h2>
+      <div class="w-20 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>
     </div>
-    <table class="table table-hover" id="dev-table">
-      <thead>
-        <tr>
 
-          <th>Name</th>
-          <th>Profile Picture</th>
-          <th>Mobile</th>
-          <th>Address</th>
-          <th>Department</th>
-          <th>Update</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      {% for d in doctors %}
-      <tr>
+    <!-- Table -->
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+      <table class="min-w-full text-sm text-gray-700">
+        <thead class="bg-blue-600 text-white text-left">
+          <tr>
+            <th class="py-3 px-4 font-semibold">Name</th>
+            <th class="py-3 px-4 font-semibold">Profile Picture</th>
+            <th class="py-3 px-4 font-semibold">Mobile</th>
+            <th class="py-3 px-4 font-semibold">Address</th>
+            <th class="py-3 px-4 font-semibold">Department</th>
+            <th class="py-3 px-4 font-semibold text-center">Update</th>
+            <th class="py-3 px-4 font-semibold text-center">Delete</th>
+          </tr>
+        </thead>
 
-        <td> {{d.get_name}}</td>
-        <td> <img src="{% static d.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{d.mobile}}</td>
-        <td>{{d.address}}</td>
-        <td>{{d.department}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-doctor' d.id  %}"><span class="glyphicon glyphicon-edit"></span></a></td>
-        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-doctor-from-hospital' d.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-      </tr>
-      {% endfor %}
-    </table>
+        <tbody class="divide-y divide-gray-200">
+          {% for d in doctors %}
+          <tr class="hover:bg-blue-50 transition duration-200">
+            <td class="py-3 px-4">{{ d.get_name }}</td>
+            <td class="py-3 px-4">
+              <img src="{% static d.profile_pic.url %}" alt="Profile Pic" class="w-10 h-10 rounded-full object-cover border">
+            </td>
+            <td class="py-3 px-4">{{ d.mobile }}</td>
+            <td class="py-3 px-4">{{ d.address }}</td>
+            <td class="py-3 px-4">{{ d.department }}</td>
+            <td class="py-3 px-4 text-center">
+              <a href="{% url 'update-doctor' d.id %}" 
+                 class="inline-block px-4 py-1.5 text-sm text-white bg-green-600 hover:bg-green-700 rounded-md transition">
+                Edit
+              </a>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <a href="{% url 'delete-doctor-from-hospital' d.id %}" 
+                 class="inline-block px-4 py-1.5 text-sm text-white bg-red-600 hover:bg-red-700 rounded-md transition">
+                Delete
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="py-6 text-center text-gray-500">No doctors found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>
-<!--
-developed By : sumit kumar
-facebook : fb.com/sumit.luv
-youtube : youtube.com/lazycoders
--->
 
 {% endblock content %}

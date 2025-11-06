@@ -1,9 +1,13 @@
 {% extends 'hospital/patient_base.html' %}
 {% load static %}
 {% block content %}
-{%include 'hospital/patient_dashboard_cards.html'%}
-<br><br><br><br>
 
- 
+<!-- Include dashboard cards -->
+<div class="container mx-auto px-4">
+    {% include 'hospital/patient_dashboard_cards.html' %}
+</div>
+
+<!-- Spacing below cards -->
+<div class="mt-16"></div>
 
 {% endblock content %}

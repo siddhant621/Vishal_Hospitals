@@ -1,97 +1,42 @@
 {% extends 'hospital/doctor_base.html' %}
 {% load static %}
 {% block content %}
-<br><br>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-
-  <style type="text/css">
-    a:link {
-      text-decoration: none;
-    }
-    .menu{
-      top: 50px;
-    }
-    h6 {
-      color: white;
-    }
-
-    .order-card {
-      color: #fff;
-    }
-
-    .bg-c-blue {
-      background: linear-gradient(45deg, #4099ff, #73b4ff);
-    }
-
-    .bg-c-green {
-      background: linear-gradient(45deg, #2ed8b6, #59e0c5);
-    }
-
-    .card {
-      border-radius: 5px;
-      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-      border: none;
-      margin-bottom: 30px;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .card .card-block {
-      padding: 25px;
-    }
-
-    .order-card i {
-      font-size: 26px;
-    }
-
-    .f-left {
-      float: left;
-    }
-
-    .f-right {
-      float: right;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Doctor Dashboard</title>
 </head>
 
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-blue order-card">
-          <div class="card-block">
-            <a href="/doctor-view-appointment">
-              <h6 class="m-b-20">View Your Appointment</h6>
-            </a>
-            <br>
-            <h2 class="text-right"><i class="fas fa-calendar f-left"></i></h2>
-
-          </div>
+<div class="min-h-screen bg-gradient-to-br from-blue-100 via-indigo-100 to-green-100 flex flex-col items-center justify-center py-12 px-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+    
+    <!-- View Appointment Card -->
+    <a href="/doctor-view-appointment" class="block transform transition hover:scale-105">
+      <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-2xl shadow-lg p-8 flex flex-col justify-between h-48">
+        <div>
+          <h2 class="text-2xl font-semibold">View Your Appointments</h2>
+        </div>
+        <div class="flex justify-end items-center mt-4">
+          <i class="fas fa-calendar text-4xl opacity-80"></i>
         </div>
       </div>
+    </a>
 
-      <div class="col-md-4 col-xl-6">
-        <div class="card bg-c-green order-card">
-          <div class="card-block">
-            <a href="/doctor-delete-appointment">
-              <h6 class="m-b-20">Delete Appointment</h6>
-            </a>
-            <br>
-            <h2 class="text-right"><i class="fas fa-eject f-left"></i></h2>
-          </div>
+    <!-- Delete Appointment Card -->
+    <a href="/doctor-delete-appointment" class="block transform transition hover:scale-105">
+      <div class="bg-gradient-to-r from-green-400 to-teal-500 text-white rounded-2xl shadow-lg p-8 flex flex-col justify-between h-48">
+        <div>
+          <h2 class="text-2xl font-semibold">Delete Appointment</h2>
+        </div>
+        <div class="flex justify-end items-center mt-4">
+          <i class="fas fa-trash-alt text-4xl opacity-80"></i>
         </div>
       </div>
+    </a>
 
-
-    </div>
   </div>
- 
-<br><br><br><br><br><br><br>
+</div>
+
 {% endblock content %}

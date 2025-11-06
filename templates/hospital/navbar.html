@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-  <style type="text/css">
-    .bs-example {
-      margin: 0px;
-
-    }
-
-    .navbar-brand {
-      font-size: 20px;
-      font-family: sans-serif;
-
-    }
-  </style>
+  <title>Vishal Multispeciality Hospital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-50">
 
-<body>
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-[#337AB7] text-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
 
+        <!-- Brand -->
+        <a href="/" class="text-lg font-semibold tracking-wide">
+          Vishal Multispeciality Hospital
+        </a>
 
+        <!-- Mobile menu button -->
+        <button id="menu-btn" class="block md:hidden focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" 
+               viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
 
-  <div class="bs-example">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background:#337AB7;">
-      <a href="/" class="navbar-brand">Vishal Multispeciality Hospital</a>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-        <div class="navbar-nav">
-
-          <a href="/adminclick" class="nav-item nav-link">Admin</a>
-          <a href="/doctorclick" class="nav-item nav-link">Doctor</a>
-          <a href="/patientclick" class="nav-item nav-link">Patient</a>
-
-
-        </div>
-
-        <div class="navbar-nav">
-          <a href="/aboutus" class="nav-item nav-link">About Us</a>
-          <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+        <!-- Menu Links -->
+        <div id="menu" class="hidden md:flex md:items-center md:space-x-6">
+          <div class="flex space-x-6">
+            <a href="/adminclick" class="hover:text-yellow-300 transition">Admin</a>
+            <a href="/doctorclick" class="hover:text-yellow-300 transition">Doctor</a>
+            <a href="/patientclick" class="hover:text-yellow-300 transition">Patient</a>
+          </div>
+          <div class="flex space-x-6 ml-8">
+            <a href="/aboutus" class="hover:text-yellow-300 transition">About Us</a>
+            <a href="/contactus" class="hover:text-yellow-300 transition">Contact Us</a>
+          </div>
         </div>
 
       </div>
-    </nav>
-  </div>
+    </div>
 
-  
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="md:hidden hidden bg-[#337AB7] text-white">
+      <a href="/adminclick" class="block px-4 py-2 hover:bg-blue-600">Admin</a>
+      <a href="/doctorclick" class="block px-4 py-2 hover:bg-blue-600">Doctor</a>
+      <a href="/patientclick" class="block px-4 py-2 hover:bg-blue-600">Patient</a>
+      <a href="/aboutus" class="block px-4 py-2 hover:bg-blue-600">About Us</a>
+      <a href="/contactus" class="block px-4 py-2 hover:bg-blue-600">Contact Us</a>
+    </div>
+  </nav>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- Spacer so content doesn’t hide behind navbar -->
+  <div class="h-16"></div>
 
 </body>
-
 </html>
