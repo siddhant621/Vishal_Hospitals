@@ -1,0 +1,139 @@
+"use server";
+
+import { db } from "@/lib/prisma";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
+
+/**
+ * Sets the user's role and related information
+ */
+export async function setUserRole(formData) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  // Get user info from Clerk
+  const clerkUser = await currentUser();
+  if (!clerkUser) {
+    throw new Error("User not found in Clerk");
+  }
+
+  // Find or create user in our database
+  let user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    // Create user if they don't exist
+    const name = `${clerkUser.firstName} ${clerkUser.lastName}`;
+    user = await db.user.create({
+      data: {
+        clerkUserId: userId,
+        name,
+        imageUrl: clerkUser.imageUrl,
+        email: clerkUser.emailAddresses[0].emailAddress,
+      },
+    });
+  }
+
+  const role = formData.get("role");
+
+  if (!role || !["PATIENT", "DOCTOR"].includes(role)) {
+    throw new Error("Invalid role selection");
+  }
+
+  try {
+    // For patient role - simple update
+    if (role === "PATIENT") {
+      await db.user.update({
+        where: {
+          clerkUserId: userId,
+        },
+        data: {
+          role: "PATIENT",
+        },
+      });
+
+      revalidatePath("/");
+      return { success: true, redirect: "/doctors" };
+    }
+
+    // For doctor role - need additional information
+    if (role === "DOCTOR") {
+      const specialty = formData.get("specialty");
+      const experience = parseInt(formData.get("experience"), 10);
+      const credentialUrl = formData.get("credentialUrl");
+      const description = formData.get("description");
+
+      // Validate inputs
+      if (!specialty || !experience || !credentialUrl || !description) {
+        throw new Error("All fields are required");
+      }
+
+      await db.user.update({
+        where: {
+          clerkUserId: userId,
+        },
+        data: {
+          role: "DOCTOR",
+          specialty,
+          experience,
+          credentialUrl,
+          description,
+          verificationStatus: "PENDING",
+        },
+      });
+
+      revalidatePath("/");
+      return { success: true, redirect: "/doctor/verification" };
+    }
+  } catch (error) {
+    console.error("Failed to set user role:", error);
+    throw new Error(`Failed to update user profile: ${error.message}`);
+  }
+}
+
+/**
+ * Gets the current user's complete profile information
+ */
+export async function getCurrentUser() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return null;
+  }
+
+  // Get user info from Clerk
+  const clerkUser = await currentUser();
+  if (!clerkUser) {
+    return null;
+  }
+
+  try {
+    let user = await db.user.findUnique({
+      where: {
+        clerkUserId: userId,
+      },
+    });
+
+    // Create user if they don't exist
+    if (!user) {
+      const name = `${clerkUser.firstName} ${clerkUser.lastName}`;
+      user = await db.user.create({
+        data: {
+          clerkUserId: userId,
+          name,
+          imageUrl: clerkUser.imageUrl,
+          email: clerkUser.emailAddresses[0].emailAddress,
+        },
+      });
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Failed to get user information:", error);
+    return null;
+  }
+}
